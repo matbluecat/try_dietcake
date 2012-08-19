@@ -1,8 +1,15 @@
 <?php
+/**
+ * CakePHP-like view class for DietCake
+ *
+ * @license MIT License
+ * @author Tatsuya Tsuruoka <http://github.com/ttsuruoka>
+ * @link https://github.com/dietcake/dietcake-showcase
+ */
+
 class AppLayoutView extends View
 {
-    public $layout = 'default';
-    public static $ext = '.php';
+    public $layout = 'layouts/default';
 
     public function render($action = null)
     {
@@ -16,7 +23,7 @@ class AppLayoutView extends View
         $content = self::extractAndMerge($view_filename, $this->vars);
 
         // render layout
-        $layout_filename = VIEWS_DIR . 'layouts/' . $this->layout . self::$ext;
+        $layout_filename = VIEWS_DIR . $this->layout . self::$ext;
         $this->vars['_content_'] = $content;
         $this->controller->output .= self::extractAndMerge($layout_filename, $this->vars);
     }
