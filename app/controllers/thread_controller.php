@@ -20,16 +20,23 @@ class ThreadController extends AppController
     public function write()
     {
         $thread = Thread::get(Param::get('thread_id'));
-        $page = Param::get('page_next');
+        $page = Param::get('page_next', 'write');
 
         switch ($page) {
+        case 'write':
+            $comment = new Comment;
+            break;
         case 'write_end':
             $params = array(
                 'username' => Param::get('username'),
                 'body' => Param::get('body'),
             );
             $comment = new Comment($params);
-            $thread->write($comment);
+            try {
+                $thread->write($comment);
+            } catch (ValidationException $e) {
+                $page = 'write';
+            }
             break;
         default:
             throw new NotFoundException("{$page} is not found");
