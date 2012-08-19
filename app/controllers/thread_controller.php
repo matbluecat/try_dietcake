@@ -12,6 +12,7 @@ class ThreadController extends AppController
     {
         $thread_id = Param::get('thread_id');
         $thread = Thread::get($thread_id);
+        $comments = $thread->getComments();
 
         $this->set(get_defined_vars());
     }
