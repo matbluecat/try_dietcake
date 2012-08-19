@@ -1,6 +1,14 @@
 <?php
 class Thread extends AppModel
 {
+    public $validation = array(
+        'title' => array(
+            'length' => array(
+                'validate_between', 1, 30,
+            ),
+        ),
+    );
+
     public static function get($id)
     {
         $db = DB::conn();
@@ -32,6 +40,26 @@ class Thread extends AppModel
         }
 
         return $comments;
+    }
+
+    public function create(Comment $comment)
+    {
+        $this->validate();
+        $comment->validate();
+        if ($this->hasError() || $comment->hasError()) {
+            throw new ValidationException('invalid thread or comment');
+        }
+
+        $db = DB::conn();
+        $db->begin();
+
+        $db->query('INSERT INTO thread SET title = ?, created = NOW()', array($this->title));
+        $this->id = $db->lastInsertId();
+
+        // write first comment at the same time
+        $this->write($comment);
+
+        $db->commit();
     }
 
     public function write(Comment $comment)
