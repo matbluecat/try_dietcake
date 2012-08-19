@@ -12,6 +12,7 @@ require_once VENDOR_DIR.'SimpleDBI/SimpleDBI.php';
 require_once HELPERS_DIR.'html_helper.php';
 
 // config
+require_once CONFIG_DIR.'router.php';
 require_once CONFIG_DIR.'database.php';
 
 spl_autoload_register(function($name) {
