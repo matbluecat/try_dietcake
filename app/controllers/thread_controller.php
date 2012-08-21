@@ -10,20 +10,17 @@ class ThreadController extends AppController
 
     public function create()
     {
+        $thread = new Thread;
+        $comment = new Comment;
         $page = Param::get('page_next', 'create');
 
         switch ($page) {
         case 'create':
-            $thread = new Thread;
-            $comment = new Comment;
             break;
         case 'create_end':
-            $thread = new Thread(array('title' => Param::get('title')));
-            $params = array(
-                'username' => Param::get('username'),
-                'body' => Param::get('body'),
-            );
-            $comment = new Comment($params);
+            $thread->title = Param::get('title');
+            $comment->username = Param::get('username');
+            $comment->body = Param::get('body');
             try {
                 $thread->create($comment);
             } catch (ValidationException $e) {
@@ -41,8 +38,7 @@ class ThreadController extends AppController
 
     public function view()
     {
-        $thread_id = Param::get('thread_id');
-        $thread = Thread::get($thread_id);
+        $thread = Thread::get(Param::get('thread_id'));
         $comments = $thread->getComments();
 
         $this->set(get_defined_vars());
@@ -51,18 +47,15 @@ class ThreadController extends AppController
     public function write()
     {
         $thread = Thread::get(Param::get('thread_id'));
+        $comment = new Comment;
         $page = Param::get('page_next', 'write');
 
         switch ($page) {
         case 'write':
-            $comment = new Comment;
             break;
         case 'write_end':
-            $params = array(
-                'username' => Param::get('username'),
-                'body' => Param::get('body'),
-            );
-            $comment = new Comment($params);
+            $comment->username = Param::get('username');
+            $comment->body = Param::get('body');
             try {
                 $thread->write($comment);
             } catch (ValidationException $e) {
