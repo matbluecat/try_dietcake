@@ -27,7 +27,7 @@
   <label>Your name</label>
   <input type="text" class="span2" name="username"  value="<?php eh(Param::get('username')) ?>">
   <label>Comment</label>
-  <textarea name="body"<?php eh(Param::get('body')) ?>></textarea>
+  <textarea name="body"><?php eh(Param::get('body')) ?></textarea>
   <br />
   <input type="hidden" name="page_next" value="create_end">
   <button type="submit" class="btn btn-primary">Submit</button>
