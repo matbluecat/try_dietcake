@@ -1,2 +1,4 @@
 app/config/core.php
 app/tmp/logs/*.log
+app/tmp/cache
+*.swp
