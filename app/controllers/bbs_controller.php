@@ -72,4 +72,33 @@ class BbsController extends AppController
         $this->set(get_defined_vars());
         $this->render($page);
     }
+
+    public function delete()
+    {
+        $thread = Thread::get(Param::get('thread_id'));
+        $comments = $thread->getComments();
+        $page = Param::get('page_next', 'delete');
+
+		switch($page){
+			// Thread delete confirm
+			case 'delete':
+				break;
+			// Thread delete complete
+			case 'delete_end':
+				try{
+					$thread->delete(Param::get('thread_id'));
+				}catch(ValidationException $e){
+					$page = 'view';
+				}
+				break;
+			default:
+            	throw new NotFoundException("{$page} is not found");
+				break;
+		}
+
+        $this->set(get_defined_vars());
+        $this->render($page);
+    }
+
+
 }

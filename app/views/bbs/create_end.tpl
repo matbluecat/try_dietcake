@@ -4,4 +4,4 @@
   You successfully created.
 </p>
 
-<a href="{{smarty_url url='bbs/view' thread_id=$thread->id|eh}}">&larr; Go to thread</a>
+<a href="{{url url='bbs/view' thread_id=$thread->id|eh}}">&larr; Go to thread</a>

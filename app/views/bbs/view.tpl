@@ -14,7 +14,7 @@
 
 <hr>
 
-<form class="well" method="post" action="{{smarty_url url='bbs/write'|eh}}">
+<form class="well" method="post" action="{{url url='bbs/write'|eh}}">
   <label>Your name</label>
   <input type="text" class="span2" name="username"  value="{{Param::get('username')|eh}}">
   <label>Comment</label>
@@ -24,3 +24,10 @@
   <input type="hidden" name="page_next" value="write_end">
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+
+<form class="well" method="post" action="{{url url='bbs/delete'|eh}}">
+  <input type="hidden" name="thread_id" value="{{$thread->id|eh}}">
+  <button type="submit" class="btn btn-danger">Delete this thread</button>
+</form>
+

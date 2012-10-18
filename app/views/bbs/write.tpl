@@ -17,7 +17,7 @@
 </div>
 {{/if}}
 
-<form class="well" method="post" action="{{smarty_url url=''}}">
+<form class="well" method="post" action="{{url url=''}}">
   <label>Your name</label>
   <input type="text" class="span2" name="username"  value="{{Param::get('username')|eh}}">
   <label>Comment</label>

@@ -1,7 +1,7 @@
 <h1>Create a thread</h1>
 
 {{if $thread->hasError() || $comment->hasError()}}
-$B$($i!<(B
+えらー
 {{/if}}
 {{if $thread->hasError() || $comment->hasError()}}
 <div class="alert alert-block">
@@ -32,7 +32,7 @@
 </div>
 {{/if}}
 
-<form class="well" method="post" action="{{smarty_url url=''|eh}}">
+<form class="well" method="post" action="{{url url=''|eh}}">
   <label>Title</label>
   <input type="text" class="span2" name="title"  value="{{Param::get('title')|eh}}">
   <label>Your name</label>

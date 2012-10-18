@@ -71,4 +71,22 @@ class Thread extends AppModel
         $db = DB::conn();
         $db->query('INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()', array($this->id, $comment->username, $comment->body));
     }
+
+	public function delete($id)
+	{
+        $db = DB::conn();
+		$db->begin();
+        $db->query('DELETE FROM thread WHERE id = ?', array($id));
+        $db->query('DELETE FROM comment WHERE thread_id = ?', array($id));
+		$db->commit();
+	}
+
+	public function delete_comment(Comment $comment)
+	{
+        $db = DB::conn();
+		$db->begin();
+        $db->query('DELETE FROM comment WHERE id = ?', array($comment->id));
+		$db->commit();
+	}
+
 }
