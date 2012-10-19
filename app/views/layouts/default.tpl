@@ -18,6 +18,24 @@
       <div class="navbar-inner">
         <div class="container">
           <a class="brand" href="{{url url="/"}}">DietCake Message Board</a>
+
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="{{url url="/"}}">Home</a>
+              </li>
+              <li class="">
+                <a href="{{url url="thread/index"}}">Thread</a>
+              </li>
+              <li class="">
+                <a href="{{url url="bbs/index"}}">Bbs</a>
+              </li>
+              <li class="">
+                <a href="{{url url="blog/index"}}">Blog</a>
+              </li>
+            </ul>
+
+
         </div>
       </div>
     </div>
