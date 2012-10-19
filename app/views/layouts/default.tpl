@@ -34,8 +34,7 @@
                 <a href="{{url url="blog/index"}}">Blog</a>
               </li>
             </ul>
-
-
+          </div>
         </div>
       </div>
     </div>
