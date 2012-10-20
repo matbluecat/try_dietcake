@@ -76,5 +76,18 @@ class Entry extends AppModel
 		return $blog_comments;
 	}
 
+	public function writeComment(BlogComment $blog_comment){
+		$blog_comment->validate();
+		if($blog_comment->hasError()){
+			throw new ValidationException('invalid blog_comment');
+		}
+		$db = DB::conn();
+		$db->query('INSERT INTO blog_comment SET entry_id = ?, username= ?, body = ?, created = NOW()', array(
+			$this->id,
+			$blog_comment->username,
+			$blog_comment->body,
+		));
+	}
+
 
 }

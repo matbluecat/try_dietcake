@@ -35,14 +35,39 @@
 {{/if}}
 {{/foreach}}
 
-<form class="well" method="post" action="{{url url='blog/write'|eh}}">
+
+{{if isset($blog_comment) && $blog_comment->hasError()}}
+<div class="alert alert-block">
+  <h4 class="alert-heading">Validation error!</h4>
+  {{if $blog_comment->validation_errors.username.length!=''}}
+    <div><em>Your name</em> must be
+    between 
+	{{$blog_comment->validation.username.length.1|eh}}
+	and 
+	{{$blog_comment->validation.username.length.2|eh}}
+	characters in length.
+    </div>
+  {{/if}}
+  {{if $blog_comment->validation_errors.body.length!=''}}
+    <div><em>Comment</em> must be
+    between 
+	{{$blog_comment->validation.body.length.1|eh}}
+	and 
+	{{$blog_comment->validation.body.length.2|eh}}
+	characters in length.
+    </div>
+  {{/if}}
+</div>
+{{/if}}
+
+<form class="well" method="post" action="{{url url='blog/comment_write'|eh}}">
   <label>Your name</label>
   <input type="text" class="span2" name="username"  value="{{Param::get('username')|eh}}">
   <label>Comment</label>
   <textarea name="body">{{Param::get('body')|eh}}</textarea>
   <br />
   <input type="hidden" name="entry_id" value="{{$entry->id|eh}}">
-  <input type="hidden" name="page_next" value="write_end">
+  <input type="hidden" name="page_next" value="comment_write_end">
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
