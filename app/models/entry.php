@@ -64,6 +64,14 @@ class Entry extends AppModel
 		$db->commit();
 	}
 
+	public function delete($id){
+        $db = DB::conn();
+		$db->begin();
+        $db->query('DELETE FROM entry WHERE id = ?', array($id));
+        $db->query('DELETE FROM blog_comment WHERE entry_id = ?', array($id));
+		$db->commit();
+	}
+
 	public function getComments()
 	{
 		$blog_comments = array();

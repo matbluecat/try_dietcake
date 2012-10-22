@@ -5,6 +5,7 @@
     <title>DietCake Message Board</title>
 
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/common/css/common.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px;

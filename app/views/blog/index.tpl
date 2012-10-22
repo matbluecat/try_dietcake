@@ -6,13 +6,18 @@
 
 	<div class="entry">
 		<div class="title">
-			<a href="{{url url='blog/view' entry_id=$v->id|eh}}">{{$v->title}}</a>
+			<h2>
+				<a href="{{url url='blog/view' entry_id=$v->id|eh}}">{{$v->title|eh}}</a>
+			</h2>
+		</div>
+		<div class="created">
+			{{$v->created|eh}}
 		</div>
 		<div class="body">
-			{{$v->body}}
+			{{$v->body|eh}}
 		</div>
 		<div class="postscript">
-			<a href="{{url url='blog/view' entry_id=$v->id|eh}}">続きを読む</a>
+			<a href="{{url url='blog/view' entry_id=$v->id|eh}}#postscript">続きを読む</a>
 		</div>
 	</div>
 

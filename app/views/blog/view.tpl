@@ -9,6 +9,7 @@
     {{$entry->body|eh}}
   </div>
   <div class="post_script">
+	<a name="postscript"></a>
     {{$entry->postscript|eh}}
   </div>
 </div>

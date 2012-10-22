@@ -45,6 +45,26 @@ class Blogcontroller extends AppController
 
 	// 記事の削除
 	public function delete(){
+		$entry = Entry::get(Param::get('entry_id'));
+		$blog_comments = $entry->getComments();
+		$page = Param::get('page_next', 'delete');
+
+		switch($page){
+			case 'delete':
+				break;
+			case 'delete_end':
+				try{
+					$entry->delete(Param::get('entry_id'));
+				}catch(ValidationException $e){
+					$page = 'view';
+				}
+				break;
+			default:
+				throw new NotFoundException("{$page} is not found");
+				break;
+		}
+		$this->set(get_defined_vars());
+		$this->render($page);
 	}
 
 	// 記事へのコメント
