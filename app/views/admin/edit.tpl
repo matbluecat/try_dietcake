@@ -1,3 +1,9 @@
+<ul class="breadcrumb">
+  <li><a href="{{url url='admin/index'}}">Admin</a> <span class="divider">/</span></li>
+  <li><a href="{{url url='admin/view' entry_id=$entry->id}}">Entry</a> <span class="divider">/</span></li>
+  <li class="active">Edit</li>
+</ul>
+
 <h1>Edit an entry</h1>
 
 {{if $entry->hasError()}}

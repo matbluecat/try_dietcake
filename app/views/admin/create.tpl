@@ -1,3 +1,8 @@
+<ul class="breadcrumb">
+  <li><a href="{{url url='admin/index'}}">Admin</a> <span class="divider">/</span></li>
+  <li class="active">Create</li>
+</ul>
+
 <h1>Create a new entry</h1>
 
 {{if $entry->hasError()}}

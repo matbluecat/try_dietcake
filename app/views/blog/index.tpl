@@ -7,14 +7,14 @@
 	<div class="entry">
 		<div class="title">
 			<h2>
-				<a href="{{url url='blog/view' entry_id=$v->id|eh}}">{{$v->title|eh}}</a>
+				<a href="{{url url='blog/view' entry_id=$v->id|eh}}">{{$v->title|eh|nl2br}}</a>
 			</h2>
 		</div>
 		<div class="created">
-			{{$v->created|eh}}
+			{{$v->created|eh|nl2br}}
 		</div>
 		<div class="body">
-			{{$v->body|eh}}
+			{{$v->body|eh|nl2br}}
 		</div>
 		<div class="postscript">
 			<a href="{{url url='blog/view' entry_id=$v->id|eh}}#postscript">続きを読む</a>
@@ -24,5 +24,3 @@
 	{{if $smarty.foreach.entry_loop.last}}
 	{{/if}}
 {{/foreach}}
-
-<a class="btn btn-large btn-primary" href="{{url url='blog/create'}}">Create new entry</a>

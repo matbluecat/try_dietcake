@@ -34,6 +34,9 @@
               <li class="">
                 <a href="{{url url="blog/index"}}">Blog</a>
               </li>
+              <li class="">
+                <a href="{{url url="admin/index"}}">Blog Admin</a>
+              </li>
             </ul>
           </div>
         </div>

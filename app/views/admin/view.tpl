@@ -1,9 +1,20 @@
+<ul class="breadcrumb">
+  <li><a href="{{url url='admin/index'}}">Admin</a> <span class="divider">/</span></li>
+  <li class="active">View</li>
+</ul>
+
 <h1>{{$entry->title|eh}}</h1>
+
+
+<div class="btn-group">
+  <a href="{{url url='admin/edit' entry_id=$entry->id|eh}}" class="btn btn-info">Edit this entry</a>
+  <a href="{{url url='admin/delete' entry_id=$entry->id|eh}}" class="btn btn-danger">Delete this entry</a>
+</div>
 
 
 <div class="entry">
   <div class="created">
-    {{$entry->created|eh|nl2br}}
+    {{$entry->created|eh}}
   </div>
   <div class="body">
     {{$entry->body|eh|nl2br}}
@@ -24,7 +35,7 @@
     {{$item->username|eh}}
   </div>
   <div class="body">
-    {{$item->body|eh|nl2br}}
+    {{$item->body|eh}}
   </div>
   <div class="created">
     {{$item->created|eh}}
@@ -61,7 +72,7 @@
 </div>
 {{/if}}
 
-<form class="well" method="post" action="{{url url='blog/comment_write'|eh}}">
+<form class="well" method="post" action="{{url url='admin/comment_write'|eh}}">
   <label>Your name</label>
   <input type="text" class="span2" name="username"  value="{{Param::get('username')|eh}}">
   <label>Comment</label>
@@ -71,3 +82,5 @@
   <input type="hidden" name="page_next" value="comment_write_end">
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+

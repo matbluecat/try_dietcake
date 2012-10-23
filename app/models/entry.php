@@ -20,7 +20,7 @@ class Entry extends AppModel
         $entries = array();
 
         $db = DB::conn();
-        $rows = $db->rows('SELECT * FROM entry');
+        $rows = $db->rows('SELECT * FROM entry ORDER BY created DESC');
         foreach ($rows as $row) {
             $entries[] = new Entry($row);
         }
