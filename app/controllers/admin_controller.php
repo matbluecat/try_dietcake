@@ -3,13 +3,63 @@ class AdminController extends AppController
 {
 	public $default_view_class = 'AppSmartyView';
 
+	private function isLogin(){
+		try{
+			$admin = Admin::getLogin();
+			return $admin;
+		}catch(AdminLoginException $e){
+			$page = 'login';
+			$this->render($page);
+		}
+	}
+
+	public function logout(){
+		$admin = $this->isLogin();
+		Admin::logout();
+		$page = 'login';
+		$this->render($page);
+	}
+
+	public function login(){
+		$page = Param::get('page_next', 'login');
+
+		switch($page){
+			case 'login';
+				try{
+					$admin = $this->isLogin();
+					$this->redirect('admin/index');
+				}catch(AdminLoginException $e){
+					$page = 'login';
+				}
+
+				break;
+			case 'login_end':
+				try{
+					$admin = Admin::certificate(Param::get('admin_id'), Param::get('pass'));
+					$entries = Entry::getAll();
+					$this->redirect('admin/index');
+				}catch(AdminLoginException $e){
+					$page = 'login';
+				}
+				break;
+			default:
+				throw new NotFoundException("{$page} is not found");
+				break;
+		}
+		$this->set(get_defined_vars());
+		$this->render($page);
+	}
+
+	// 管理者用TOP
 	public function index(){
+		$admin = $this->isLogin();
 		$entries = Entry::getAll();
 		$this->set(get_defined_vars());
 	}
 
 	// 新規記事作成
 	public function create(){
+		$admin = $this->isLogin();
 		$entry = new Entry();
 		$page = Param::get('page_next', 'create');
 
@@ -37,6 +87,7 @@ class AdminController extends AppController
 
 	// 記事1件見る
 	public function view(){
+		$admin = $this->isLogin();
 		$entry = Entry::get(Param::get('entry_id'));
 		$blog_comments = $entry->getComments();
 		$this->set(get_defined_vars());
@@ -44,6 +95,7 @@ class AdminController extends AppController
 
 	// 記事の削除
 	public function delete(){
+		$admin = $this->isLogin();
 		$entry = Entry::get(Param::get('entry_id'));
 		$blog_comments = $entry->getComments();
 		$page = Param::get('page_next', 'delete');
@@ -68,6 +120,7 @@ class AdminController extends AppController
 
 	// 記事へのコメント
 	public function comment_write(){
+		$admin = $this->isLogin();
 		$page = Param::get('page_next', 'comment_write');
 		$entry = Entry::get(Param::get('entry_id'));
 		$blog_comment = new BlogComment();
@@ -97,6 +150,7 @@ class AdminController extends AppController
 
 	// 記事の編集
 	public function edit(){
+		$admin = $this->isLogin();
 		$page = Param::get('page_next', 'edit');
 
 		switch($page){

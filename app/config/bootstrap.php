@@ -17,6 +17,7 @@ require_once HELPERS_DIR.'validation_helper.php';
 require_once CONFIG_DIR.'log.php';
 require_once CONFIG_DIR.'router.php';
 require_once CONFIG_DIR.'database.php';
+require_once CONFIG_DIR.'session.php';
 
 define('CACHE_DIR', TMP_DIR.'cache/');
 

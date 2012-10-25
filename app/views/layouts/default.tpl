@@ -37,6 +37,13 @@
               <li class="">
                 <a href="{{url url="admin/index"}}">Blog Admin</a>
               </li>
+              <li class="">
+			    {{if Session::get('login_admin_id')!=''}}
+                  <a href="{{url url="admin/logout"}}">Admin Logout</a>
+			    {{else}}
+                  <a href="{{url url="admin/login"}}">Admin Login</a>
+			    {{/if}}
+              </li>
             </ul>
           </div>
         </div>
