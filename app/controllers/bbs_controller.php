@@ -1,8 +1,6 @@
 <?php
 class BbsController extends AppController
 {
-    public $default_view_class = 'AppSmartyView';
-
     public function index()
     {
         $threads = Thread::getAll();

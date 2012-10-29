@@ -1,6 +1,8 @@
 <?php
 class ThreadController extends AppController
 {
+    public $default_view_class = 'AppLayoutView';
+
     public function index()
     {
         $threads = Thread::getAll();

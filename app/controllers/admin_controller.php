@@ -1,8 +1,6 @@
 <?php
 class AdminController extends AppController
 {
-	public $default_view_class = 'AppSmartyView';
-
 	private function isLogin(){
 		try{
 			$admin = Admin::getLogin();
