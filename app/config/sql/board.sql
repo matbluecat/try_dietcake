@@ -11,19 +11,48 @@ FLUSH PRIVILEGES;
 
 USE board;
 
-CREATE TABLE IF NOT EXISTS thread (
-id                      INT UNSIGNED NOT NULL AUTO_INCREMENT,
-title                   VARCHAR(255) NOT NULL,
-created                 DATETIME NOT NULL,
-PRIMARY KEY (id)
-)ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `admin_id` varchar(32) NOT NULL,
+  `pass` varchar(40) NOT NULL,
+  `admin_name` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS comment (
-id                      INT UNSIGNED NOT NULL AUTO_INCREMENT,
-thread_id               INT UNSIGNED NOT NULL,
-username                VARCHAR(255) NOT NULL,
-body                    TEXT NOT NULL,
-created                 DATETIME NOT NULL,
-PRIMARY KEY (id),
-INDEX (thread_id, created)
-)ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS `blog_comment` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `entry_id` int(10) unsigned NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `body` text NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `thread_id` (`entry_id`,`created`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `thread_id` int(10) unsigned NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `body` text NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `thread_id` (`thread_id`,`created`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `entry` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` text NOT NULL,
+  `body` mediumtext NOT NULL,
+  `postscript` mediumtext NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `thread` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
