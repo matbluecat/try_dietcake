@@ -1,8 +1,6 @@
 <?php
 class BlogController extends AppController
 {
-	public $default_view_class = 'AppSmartyView';
-
 	public function index(){
 		$entries = Entry::getAll();
 		$this->set(get_defined_vars());
